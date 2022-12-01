@@ -1,5 +1,4 @@
 import importlib
-import json
 import pathlib
 import tkinter as tk
 import tkinter.filedialog as filedialog
@@ -7,7 +6,6 @@ import types
 from typing import Any, Callable, Optional, Union
 
 import ttkbootstrap as ttkb
-import ttkbootstrap.scrolled as scrolled
 
 import widgets.tk_widgets as widgets
 
@@ -34,15 +32,19 @@ class EntryPointWidget(ttkb.Frame):
                 self.entry_point_name_var.set(entry_point.__name__)
 
     def set_entry_point_name(self, name: str):
-        if name in self.module.__dict__:
-            if isinstance(self.module.__dict__[name], types.FunctionType):
-                self.entry_point_name_var.set(name)
+        if len(name) > 0:
+            if name in self.module.__dict__:
+                if isinstance(self.module.__dict__[name], types.FunctionType):
+                    self.entry_point_name_var.set(name)
+                else:
+                    raise ValueError(f'{name} is not a Function')
             else:
-                raise ValueError(f'{name} is not a Function')
+                raise ValueError(f'{name} is not in module {self.module.__name__}')
         else:
-            raise ValueError(f'{name} is not in module {self.module.__name__}')
+            self.entry_point_name_var.set(name)
 
     def get_entry_point_name(self) -> str:
+        print(f'get_entry_point_name {self.entry_point_name_var.get()}')
         return self.entry_point_name_var.get()
 
     def get_entry_point(self) -> Optional[types.FunctionType]:
@@ -112,16 +114,19 @@ class PluginMenuItemWidget(ttkb.Frame):
     def get_menu_item(self) -> model.PluginMenuItem:
         title: str = self.title_widget.get_value()
         entry_point_name: str = self.entry_point_widget.get_entry_point_name()
+        print(f'get_menu_item: Entry Point Name {entry_point_name}')
         sel_person: bool = self.sel_person_var.get() == 1
         sel_date_range: bool = self.sel_dates_var.get() == 1
         sel_dp_type: bool = self.sel_dp_type_var.get() == 1
         if self.menu_item is None:
             self.menu_item = model.PluginMenuItem(title=title, entry_point_name=entry_point_name,
-                                                          select_person=sel_person, select_date_range=sel_date_range,
-                                                          select_dp_type=sel_dp_type)
+                                                  select_person=sel_person, select_date_range=sel_date_range,
+                                                  select_dp_type=sel_dp_type)
+            print('get_menu_item: New Item Created')
         else:
+            print('get_menu_item: Item Updated')
             self.menu_item.title = title
-            self.entry_point = entry_point_name
+            self.menu_item.entry_point_name = entry_point_name
             self.menu_item.sel_person = sel_person
             self.menu_item.select_date_range = sel_date_range
             self.menu_item.select_dp_type = sel_dp_type
@@ -232,19 +237,19 @@ class PluginMenuTree(ttkb.Treeview):
         self.columnconfigure(1, minsize=50)
         self.heading(PluginMenuTree.MENU_STR, text='Menu')
         self.heading(PluginMenuTree.ITEM_STR, text='Menu Item')
-        self.menus: list[model.PluginMenu] = menus
         self.select_menu_action = select_menu_action
         self.select_item_action = select_item_action
-        for menu in menus:
-            menu_iid: str = self.insert(parent='', index='end', text='Menu:', open=True,
-                                        tags=[PluginMenuTree.MENU_TAG, ])
-            self.save_menu_attr(menu_iid=menu_iid, menu=menu)
-            for item in menu.items:
-                item_iid = self.insert(parent=menu_iid, index='end', text='Menu Item:',
-                                       tags=[PluginMenuTree.ITEM_TAG, ])
-                self.save_item_attr(item_iid, item)
-                idx = self.index(item_iid)
-                pass
+        if len(menus) > 0:
+            for menu in menus:
+                menu_iid: str = self.insert(parent='', index='end', text='Menu:', open=True,
+                                            tags=[PluginMenuTree.MENU_TAG, ])
+                self.save_menu_attr(menu_iid=menu_iid, menu=menu)
+                for item in menu.items:
+                    item_iid = self.insert(parent=menu_iid, index='end', text='Menu Item:',
+                                           tags=[PluginMenuTree.ITEM_TAG, ])
+                    self.save_item_attr(item_iid, item)
+        else:
+            self.insert_menu(idx=-1)
         self.tag_bind(PluginMenuTree.MENU_TAG, '<<TreeviewSelect>>', self.select_menu_action)
         self.tag_bind(PluginMenuTree.ITEM_TAG, '<<TreeviewSelect>>', self.select_item_action)
 
@@ -267,7 +272,8 @@ class PluginMenuTree(ttkb.Treeview):
         menu_iid: str = self.insert(parent='', index=idx, text='Menu:', open=True, tags=[PluginMenuTree.MENU_TAG])
         new_menu: model.PluginMenu = model.PluginMenu(title='New Menu', module_name='', items=[])
         self.save_menu_attr(menu_iid, new_menu)
-        self.insert_menu_item(menu_iid=menu_iid, idx='end')
+        _, new_item = self.insert_menu_item(menu_iid=menu_iid, idx='end')
+        new_menu.add_item(new_item)
         self.selection_set(menu_iid)
         return menu_iid, new_menu
 
@@ -285,9 +291,28 @@ class PluginMenuTree(ttkb.Treeview):
         self.selection_set(item_iid)
         return item_iid, new_item
 
+    def rebuild_plugin(self, plugin: model.Plugin) -> model.Plugin:
+        menu_list: list[model.PluginMenu] = []
+        menu_iids: tuple[str] = self.get_children(item='')
+        for menu_idx in range(0, len(menu_iids)):
+            menu_iid = menu_iids[menu_idx]
+            menu_item_list: list[model.PluginMenuItem] = []
+            menu_item_iids: tuple[str] = self.get_children(item=menu_iid)
+            if len(menu_item_iids) > 0:
+                for menu_item_idx in range(0, len(menu_item_iids)):
+                    menu_item_iid = menu_item_iids[menu_item_idx]
+                    repr_str: str = self.set(menu_item_iid, PluginMenuTree.REPR)
+                    menu_item_list.append(eval(repr_str))
+                repr_str = self.set(menu_iid, PluginMenuTree.REPR)
+                menu: model.PluginMenu = eval(repr_str)
+                menu.items.extend(menu_item_list)
+                menu_list.append(menu)
+        plugin.menus = menu_list
+        return plugin
+
 
 class PluginWidget(ttkb.Frame):
-    def __init__(self, parent, plugin: Optional[model.Plugin], cancel_action: Callable, save_action: Callable,
+    def __init__(self, parent, plugin: Optional[model.Plugin], cancel_action: Callable, save_action: Optional[Callable],
                  save_as_action: Callable):
         ttkb.Frame.__init__(self, master=parent)
         self.rowconfigure(0, weight=1)
@@ -338,8 +363,9 @@ class PluginWidget(ttkb.Frame):
                                                              entry_grid_args={'column': 1, 'row': row, 'padx': 5,
                                                                               'pady': 5, 'columnspan': 3})
         row += 1
-        self.save_btn = ttkb.Button(master=header_frame, text='Save Plugin', command=self.save_action)
-        self.save_btn.grid(column=0, row=row, padx=5, pady=5, sticky=tk.EW)
+        if self.save_action is not None:
+            self.save_btn = ttkb.Button(master=header_frame, text='Save Plugin', command=self.save_action)
+            self.save_btn.grid(column=0, row=row, padx=5, pady=5, sticky=tk.EW)
 
         self.save_as_btn = ttkb.Button(master=header_frame, text='Save Plugin As ...', command=self.save_as_action)
         self.save_as_btn.grid(column=1, row=row, padx=5, pady=5, sticky=tk.W)
@@ -423,6 +449,7 @@ class PluginWidget(ttkb.Frame):
         self.current_menu = self.footer_widget.get_menu()
         self.menu_tree.save_menu_attr(self.current_menu_iid, self.current_menu)
         self.enable_insert()
+        self.replace_footer()
 
     def select_menu(self, event):
         tree_element = self.menu_tree.selection()
@@ -447,9 +474,13 @@ class PluginWidget(ttkb.Frame):
         self.footer_frame.grid(column=0, row=3, padx=15, pady=5, sticky=tk.NSEW)
 
     def save_menu_item(self):
+        print('Entering save_menu_item')
         self.current_item: model.PluginMenuItem = self.footer_widget.get_menu_item()
+        print(f'Retrieved item from widget {self.current_item.__str__()}')
         self.menu_tree.save_item_attr(self.current_item_iid, self.current_item)
+        print('saved item to tree')
         self.enable_insert()
+        self.replace_footer()
 
     def select_menu_item(self, event):
         tree_element = self.menu_tree.selection()
@@ -495,11 +526,13 @@ class PluginWidget(ttkb.Frame):
         if self.current_menu is not None:
             if self.current_item is not None:
                 self.current_item_iid, self.current_item = self.insert_item_above()
+                self.current_menu.add_item(self.current_item)
                 self.populate_menu_item_widget(module_name=self.current_menu.module_name,
                                                menu_iid=self.current_menu_iid, item_iid=self.current_item_iid,
                                                item=self.current_item)
             else:
                 self.current_menu_iid, self.current_menu = self.insert_menu_above()
+                self.plugin.add_menu(self.current_menu)
                 self.populate_menu_widget(menu_iid=self.current_menu_iid, menu=self.current_menu)
         self.disable_insert()
 
@@ -508,11 +541,13 @@ class PluginWidget(ttkb.Frame):
         if self.current_menu is not None:
             if self.current_item is not None:
                 self.current_item_iid, self.current_item = self.insert_item_below()
+                self.current_menu.add_item(self.current_item)
                 self.populate_menu_item_widget(module_name=self.current_menu.module_name,
                                                menu_iid=self.current_menu_iid, item_iid=self.current_item_iid,
                                                item=self.current_item)
             else:
                 self.current_menu_iid, self.current_menu = self.insert_menu_below()
+                self.plugin.add_menu(self.current_menu)
                 self.populate_menu_widget(menu_iid=self.current_menu_iid, menu=self.current_menu)
         self.disable_insert()
 
@@ -523,6 +558,7 @@ class PluginWidget(ttkb.Frame):
             else:
                 self.delete_menu()
         self.enable_insert()
+        self.replace_footer()
 
     def insert_menu_above(self) -> tuple[str, model.PluginMenu]:
         idx = self.menu_tree.index(self.current_menu_iid)
@@ -553,4 +589,18 @@ class PluginWidget(ttkb.Frame):
         self.menu_tree.delete(self.footer_widget.item_iid)
         self.current_item = None
         self.current_item_iid = None
+
+    def rebuild_plugin(self) -> model.Plugin:
+        if self.plugin is None:
+            self.plugin = model.Plugin(name=self.name_widget.get_value(),
+                                       description=self.desc_widget.get_value(),
+                                       author_name=self.author_name_widget.get_value(),
+                                       author_email=self.author_email_widget.get_value(),
+                                       menus=[])
+        else:
+            self.plugin.name = self.name_widget.get_value()
+            self.plugin.description = self.desc_widget.get_value()
+            self.plugin.author_name = self.author_name_widget.get_value()
+            self.plugin.author_email = self.author_email_widget.get_value()
+        return self.menu_tree.rebuild_plugin(self.plugin)
 
