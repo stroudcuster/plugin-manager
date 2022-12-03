@@ -37,4 +37,7 @@ this method:
     + a function that will add a menu item to the application's menu hierarchy, given a label text and a lambda to be invoked
     + a function that will add a menu to the application's menu hierarchy, give a label text
 
-For the ttkbwidgets library see https://github.com/stroudcuster/ttkbwidgets
+For the ttkbwidgets library source see https://github.com/stroudcuster/ttkbwidgets
+
+To install from PyPI:  pip install json-plugin-mgr
+

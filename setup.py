@@ -1,10 +1,10 @@
 from setuptools import setup
 
-with open('biometrics_tracker/version.py') as f:
+with open('plugin_manager/version.py') as f:
     exec(f.read())
 
 setup(
-    name='plugin_manager',
+    name='json_plugin_mgr',
     version=__version__,
     packages=['dummy_package', 'plugin_manager', 'plugin_manager.gui', 'plugin_manager.model'],
     url='https://github.com/stroudcuster/plugin_manager',
