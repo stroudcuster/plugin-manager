@@ -1,0 +1,42 @@
+[project]
+name = "plugin_manager"
+version = "0.1.0"
+description = "A collection of ttkbootrap based GUI widgets"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]A
+dependencies = [
+    'ttkbootstrap>="1.9.0"', 'ttkbwidgets',
+]
+keywords = [
+    'plugin',
+]
+
+[project.gui-scripts]
+plugin-mgr = "plugin_manager.main:launch"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# ...
+# By default, include-package-data is true in pyproject.toml, so you do
+# NOT have to specify this line.
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--import-mode=append"
+testpaths = []
+
+
+
+

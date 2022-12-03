@@ -7,7 +7,7 @@ from typing import Any, Callable, Optional, Union
 
 import ttkbootstrap as ttkb
 
-import widgets.tk_widgets as widgets
+import widgets.ttkb_widgets as widgets
 
 import plugin_manager.model.plugin as model
 
