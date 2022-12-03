@@ -1,0 +1,698 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>plugin_tracker.gui.tk_widgets module - GUI widgets &#8212; plugin_manager 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="plugin_tracker.model.json_handler module - JSON Encoder and Decoder" href="model-json_handler.html" />
+    <link rel="prev" title="plugin_tracker.gui.tk_gui module - main application GUI" href="gui-tk_gui.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="plugin-tracker-gui-tk-widgets-module-gui-widgets">
+<span id="gui-tk-widgets"></span><h1>plugin_tracker.gui.tk_widgets module - GUI widgets<a class="headerlink" href="#plugin-tracker-gui-tk-widgets-module-gui-widgets" title="Permalink to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+</div>
+<span class="target" id="module-plugin_manager.gui.tk_widgets"></span><dl class="py class">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.EntryPointWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">plugin_manager.gui.tk_widgets.</span></span><span class="sig-name descname"><span class="pre">EntryPointWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.EntryPointWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></p>
+<p>A ttkbootstrap.Combobox based widget that presents a list of module level functions that may be selected
+entrypoints for PluginMenuItems</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.EntryPointWidget.get_entry_point">
+<span class="sig-name descname"><span class="pre">get_entry_point</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">function</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.EntryPointWidget.get_entry_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the entry point function object or None if no entry point has been selected</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the entry point function object</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Optional[types.FunctionType]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.EntryPointWidget.get_entry_point_name">
+<span class="sig-name descname"><span class="pre">get_entry_point_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.EntryPointWidget.get_entry_point_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the value of the entry point name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the entry point name</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.EntryPointWidget.get_module">
+<span class="sig-name descname"><span class="pre">get_module</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">module</span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.EntryPointWidget.get_module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the module object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the module object</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>types.ModuleType</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.EntryPointWidget.set_entry_point_name">
+<span class="sig-name descname"><span class="pre">set_entry_point_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.EntryPointWidget.set_entry_point_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the entry point name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – the name’s value</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.ModuleWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">plugin_manager.gui.tk_widgets.</span></span><span class="sig-name descname"><span class="pre">ModuleWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.ModuleWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LabeledTextWidget</span></code></p>
+<p>A widget that allows the user to select a Python module from a directory structure.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.ModuleWidget.browse">
+<span class="sig-name descname"><span class="pre">browse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.ModuleWidget.browse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Presents an open file dialog set up to select python .py files.  The name of the file becomes the new value
+for the module name entry widget</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.ModuleWidget.get_module">
+<span class="sig-name descname"><span class="pre">get_module</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">module</span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.ModuleWidget.get_module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the module object selected by the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a Python module object</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>types.ModuleType</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.ModuleWidget.get_module_name">
+<span class="sig-name descname"><span class="pre">get_module_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.ModuleWidget.get_module_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the module name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>module name</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.ModuleWidget.set_module_name">
+<span class="sig-name descname"><span class="pre">set_module_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.ModuleWidget.set_module_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the widget’s module name prompt value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>module_name</strong> (<em>str</em>) – the value to be set</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginMenuItemWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">plugin_manager.gui.tk_widgets.</span></span><span class="sig-name descname"><span class="pre">PluginMenuItemWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginMenuItemWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></p>
+<p>A ttkbootstrap based widget that presents and collects the information to create a plugin_manager.model.PluginMenuItem object</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginMenuItemWidget.get_menu_item">
+<span class="sig-name descname"><span class="pre">get_menu_item</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="model-plugin.html#plugin_manager.model.plugin.PluginMenuItem" title="plugin_manager.model.plugin.PluginMenuItem"><span class="pre">PluginMenuItem</span></a></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginMenuItemWidget.get_menu_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates and returns a plugin_manager.model.PluginMenuItem object from the widget’s  prompt values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a PluginMenuItem object built from the widget’s prompt values</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>plugin_manager.model.PluginItem</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginMenuTree">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">plugin_manager.gui.tk_widgets.</span></span><span class="sig-name descname"><span class="pre">PluginMenuTree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginMenuTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Treeview</span></code></p>
+<p>A widget based on the ttkbootstrap.Treeview widget.  The tree items are PluginMenu object and their PluginMenuItem
+children.  The tree structure is the repository for the PluginMenu and PluginMenuItems maintained by the Plugin
+Management app.  This is an easy way to keep track of insertions and deletions.  The Plugin object written to JSON
+is created from the nodes in this tree.  Each PluginMenu node contains two fields; one containing the output of
+the Plugin Menu object’s __str__ method, and the other containing the object itself.  The PluginMenu objects are
+stored with an empty PluginMenuItem list.  A PluginMenu object children will be stored in PluginMenuItem nodes
+that descend for it’s node. Each PluginMenuItem node also contains two fields;  one for the output of it’s
+__str__ method and the other for the object itself.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginMenuTree.insert_menu">
+<span class="sig-name descname"><span class="pre">insert_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="model-plugin.html#plugin_manager.model.plugin.PluginMenu" title="plugin_manager.model.plugin.PluginMenu"><span class="pre">plugin_manager.model.plugin.PluginMenu</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginMenuTree.insert_menu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert a PluginMenu node and a child PluginMenuItem node before the node indicated by the idx argument and
+return an empty PluginMenu object associated with the inserted node.  The PluginMenuItem node is created
+to provided the menu’s initial item, since another PluginMenuItem node can only be inserted by selecting an
+existing PluginMenu node</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>idx</strong> (<em>int</em>) – the index of the node the new node will be inserted before</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>an empty PluginMenu object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>plugin_manager.model.PluginMenu</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginMenuTree.insert_menu_item">
+<span class="sig-name descname"><span class="pre">insert_menu_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">menu_iid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="model-plugin.html#plugin_manager.model.plugin.PluginMenuItem" title="plugin_manager.model.plugin.PluginMenuItem"><span class="pre">plugin_manager.model.plugin.PluginMenuItem</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginMenuTree.insert_menu_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert a PluginMenuItem node before the node indicated by the idx argument and return an empty PluginMenuItem
+object associated with the inserted node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>idx</strong> (<em>int</em>) – the index of the node the new node will be inserted before</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>an empty PluginMenuItem object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>plugin_manager.model.PluginMenuItem</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginMenuTree.prev_index">
+<span class="sig-name descname"><span class="pre">prev_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginMenuTree.prev_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the index of the previous node at the hierachical level of the node indicated by the provided iid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>iid</strong> (<em>str`</em>) – the iid of the node relative to which the previous node will be selected</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the index of the previous node, or -1 if the speicified node is the first node in the tree root’s node list</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginMenuTree.rebuild_plugin">
+<span class="sig-name descname"><span class="pre">rebuild_plugin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plugin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="model-plugin.html#plugin_manager.model.plugin.Plugin" title="plugin_manager.model.plugin.Plugin"><span class="pre">Plugin</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="model-plugin.html#plugin_manager.model.plugin.Plugin" title="plugin_manager.model.plugin.Plugin"><span class="pre">Plugin</span></a></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginMenuTree.rebuild_plugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the provided Plugin object with the PluginMenu/PluginMenuItem objects stored in the Treeview widget’s
+nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>plugin</strong> (<em>plugin_manager.model.Plugin</em>) – the Plugin to be updated.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the updated Plugin object</p>
+</dd>
+</dl>
+<p>:rtype; plugin_manager.model.Plugin</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginMenuTree.save_item_attr">
+<span class="sig-name descname"><span class="pre">save_item_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item_iid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="model-plugin.html#plugin_manager.model.plugin.PluginMenuItem" title="plugin_manager.model.plugin.PluginMenuItem"><span class="pre">PluginMenuItem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginMenuTree.save_item_attr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the node specified my menu_iid with the supplied PluginMenu object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>menu_iid</strong> (<em>str</em>) – the iid of the tree node to be updated</p></li>
+<li><p><strong>item</strong> (<em>plugin_manager.model.PluginMenuItem</em>) – the PluginMenuItem object to be stored in the tree node</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginMenuTree.save_menu_attr">
+<span class="sig-name descname"><span class="pre">save_menu_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">menu_iid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="model-plugin.html#plugin_manager.model.plugin.PluginMenu" title="plugin_manager.model.plugin.PluginMenu"><span class="pre">PluginMenu</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginMenuTree.save_menu_attr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the node specified my menu_iid with the supplied PluginMenu object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>menu_iid</strong> (<em>str</em>) – the iid of the tree node to be updated</p></li>
+<li><p><strong>menu</strong> (<em>plugin_manager.model.PluginMenu</em>) – the PluginMenu object to be stored in the tree node</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginMenuWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">plugin_manager.gui.tk_widgets.</span></span><span class="sig-name descname"><span class="pre">PluginMenuWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginMenuWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></p>
+<p>Prompts the user for the information necessary to construct a plugin_manager.model.PluginMenu object</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginMenuWidget.get_menu">
+<span class="sig-name descname"><span class="pre">get_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="model-plugin.html#plugin_manager.model.plugin.PluginMenu" title="plugin_manager.model.plugin.PluginMenu"><span class="pre">PluginMenu</span></a></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginMenuWidget.get_menu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates and returns a PluginMenu object from the widget’s prompt values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a PluginMenu object</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>plugin_manager.model.PluginMenu</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">plugin_manager.gui.tk_widgets.</span></span><span class="sig-name descname"><span class="pre">PluginWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></p>
+<p>Prompts the user for the title, description, author name and author email properties to be used in creating or
+updating a plugin_manager.model.Plugin object</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.cancel">
+<span class="sig-name descname"><span class="pre">cancel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.cancel" title="Permalink to this definition">¶</a></dt>
+<dd><p>A callback method to be invoked when the Cancel button on the PluginMenuWidget or PluginMenuItemWidget is
+clicked</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>A callback method to be invoked when the Delete button is clicked on the PluginMenuTreeWidget is clicked.
+The invokation is delegated to the delete_item or delete_menu method, depending on whether a PluginMenuItem
+or PluginMenu was selected when the button was clicked</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.delete_item">
+<span class="sig-name descname"><span class="pre">delete_item</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.delete_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the currently selected PluginMenuItem node on the PluginMenuTreeWidget</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.delete_menu">
+<span class="sig-name descname"><span class="pre">delete_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.delete_menu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the currently selected PluginMenu node on the PluginMenuTreeWidget</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.disable_insert">
+<span class="sig-name descname"><span class="pre">disable_insert</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.disable_insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disable the Insert Above and Insert Below buttons</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.enable_insert">
+<span class="sig-name descname"><span class="pre">enable_insert</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.enable_insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable the Insert Above and Insert Below buttons</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.focus_set">
+<span class="sig-name descname"><span class="pre">focus_set</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.focus_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delegate focus set calls to the Plugin Name widgetd</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.insert_above">
+<span class="sig-name descname"><span class="pre">insert_above</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.insert_above" title="Permalink to this definition">¶</a></dt>
+<dd><p>A callback method to be invoked when the Insert Above button on the PluginMenuTreeWidget is clicked.  The
+invocation is delegated to the insert_item_above method if a PluginMenuItem node was selected when the
+button was clicked, or the insert_menu_above if a PluginMenu node was selected when the button was clicked</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.insert_below">
+<span class="sig-name descname"><span class="pre">insert_below</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.insert_below" title="Permalink to this definition">¶</a></dt>
+<dd><p>A callback method to be invoked when the Insert Above button on the PluginMenuTreeWidget is clicked.  The
+invocation is delegated to the insert_item_below method if a PluginMenuItem node was selected when the
+button was clicked, or the insert_menu_below if a PluginMenu node was selected when the button was clicked</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.insert_item_above">
+<span class="sig-name descname"><span class="pre">insert_item_above</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="model-plugin.html#plugin_manager.model.plugin.PluginMenuItem" title="plugin_manager.model.plugin.PluginMenuItem"><span class="pre">plugin_manager.model.plugin.PluginMenuItem</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.insert_item_above" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert a PluginMenuItem node above the selected node in the PluginMenuTreeWidget</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the iid and PluginMenuItem object associated with the inserted node.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[str, plugin_manager.model.PluginMenuItem]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.insert_item_below">
+<span class="sig-name descname"><span class="pre">insert_item_below</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="model-plugin.html#plugin_manager.model.plugin.PluginMenuItem" title="plugin_manager.model.plugin.PluginMenuItem"><span class="pre">plugin_manager.model.plugin.PluginMenuItem</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.insert_item_below" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert a PluginMenuItem node below the selected node in the PluginMenuTreeWidget</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the iid and PluginMenuItem object associated with the inserted node.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[str, plugin_manager.model.PluginMenuItem]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.insert_menu_above">
+<span class="sig-name descname"><span class="pre">insert_menu_above</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="model-plugin.html#plugin_manager.model.plugin.PluginMenu" title="plugin_manager.model.plugin.PluginMenu"><span class="pre">plugin_manager.model.plugin.PluginMenu</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.insert_menu_above" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert a PluginMenu node above the selected node in the PluginMenuTreeWidget</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the iid and PluginMenu object associated with the inserted node.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[str, plugin_manager.model.PluginMenu]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.insert_menu_below">
+<span class="sig-name descname"><span class="pre">insert_menu_below</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="model-plugin.html#plugin_manager.model.plugin.PluginMenu" title="plugin_manager.model.plugin.PluginMenu"><span class="pre">plugin_manager.model.plugin.PluginMenu</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.insert_menu_below" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert a PluginMenu node below the selected node in the PluginMenuTreeWidget</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the iid and PluginMenu object associated with the inserted node.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[str, plugin_manager.model.PluginMenu]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.populate_menu_item_widget">
+<span class="sig-name descname"><span class="pre">populate_menu_item_widget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_iid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_iid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="model-plugin.html#plugin_manager.model.plugin.PluginMenuItem" title="plugin_manager.model.plugin.PluginMenuItem"><span class="pre">PluginMenuItem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.populate_menu_item_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a PluginMenuItemWidget and populates its prompt values fro the provided PluginMenuItem.  Before
+creating the widget, the module specified by the module_name property is imported.  If the module is not
+found a ModuleNotFound exception is thrown.  If the module cannot be imported because off syntax errors,
+an ImportError exception is thrown.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module_name</strong> – </p></li>
+<li><p><strong>menu_iid</strong> – </p></li>
+<li><p><strong>item_iid</strong> – </p></li>
+<li><p><strong>item</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.populate_menu_widget">
+<span class="sig-name descname"><span class="pre">populate_menu_widget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">menu_iid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="model-plugin.html#plugin_manager.model.plugin.PluginMenu" title="plugin_manager.model.plugin.PluginMenu"><span class="pre">PluginMenu</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.populate_menu_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a PluginMenuWidget from the provided PluginMenu object, places the widget in the footer frame</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.populate_plugin_widget">
+<span class="sig-name descname"><span class="pre">populate_plugin_widget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.populate_plugin_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the plugin name, description and author name and email using the provied Plugin object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.rebuild_plugin">
+<span class="sig-name descname"><span class="pre">rebuild_plugin</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="model-plugin.html#plugin_manager.model.plugin.Plugin" title="plugin_manager.model.plugin.Plugin"><span class="pre">Plugin</span></a></span></span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.rebuild_plugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Plugin object from the prompts on the PluginWidget and the nodes on the PluginMenuTreeWidget</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the created Plugin object</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>plugin_manager.model.Plugin</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.replace_footer">
+<span class="sig-name descname"><span class="pre">replace_footer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.replace_footer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a blank place holder Frame and grid it into footer frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.save_menu">
+<span class="sig-name descname"><span class="pre">save_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.save_menu" title="Permalink to this definition">¶</a></dt>
+<dd><p>A callback method to be invoked to save an updated PluginMenu object to its node in its PlugInMenuTree node.
+After saving the object, the Insert Above/Below buttons are enabled and a placeholder frame is inserted into
+the footer frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.save_menu_item">
+<span class="sig-name descname"><span class="pre">save_menu_item</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.save_menu_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>A callback method to be invoked when the Save button on the PluginMenuWidget is clicked</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.select_menu">
+<span class="sig-name descname"><span class="pre">select_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.select_menu" title="Permalink to this definition">¶</a></dt>
+<dd><p>A callback to be invoked when a Plugin node on the PluginMenuTreeWidget is clicked</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>event</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plugin_manager.gui.tk_widgets.PluginWidget.select_menu_item">
+<span class="sig-name descname"><span class="pre">select_menu_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plugin_manager.gui.tk_widgets.PluginWidget.select_menu_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>A callback method to be invoked when a PluginMenu node on the PluginMenuTreeWidget is clicked</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>event</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">plugin_manager</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">The MIT License (MIT)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="main.html">plugin_tracker.main module - desktop application entry point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui-tk_gui.html">plugin_tracker.gui.tk_gui module - main application GUI</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">plugin_tracker.gui.tk_widgets module - GUI widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model-json_handler.html">plugin_tracker.model.json_handler module - JSON Encoder and Decoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model-plugin.html">plugin_tracker.model.plugin module - data classes</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="api.html">API</a><ul>
+      <li>Previous: <a href="gui-tk_gui.html" title="previous chapter">plugin_tracker.gui.tk_gui module - main application GUI</a></li>
+      <li>Next: <a href="model-json_handler.html" title="next chapter">plugin_tracker.model.json_handler module - JSON Encoder and Decoder</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Stroud Custer.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/gui-tk_widgets.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

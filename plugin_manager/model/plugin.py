@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from importlib import import_module
-import pathlib
 from typing import Callable, Optional
 
 
@@ -152,6 +151,13 @@ class PluginMenu:
         self.items.append(item)
 
     def get_menu_item(self, match_title: str) -> Optional[PluginMenuItem]:
+        """
+        Retrieve a PluginMenuItem object that matches the provided title
+        :param match_title: the title of the PluginMenuItem to be retrieved
+        :type match_title: str
+        :return: Optional[plugin_manager.model.PluginMenuItem
+
+        """
         idx = self.items.index(match_title)
         if idx < 0:
             return None
@@ -236,6 +242,15 @@ class Plugin:
         self.menus.append(menu)
 
     def get_menu(self, match_title: str) -> Optional[PluginMenu]:
+        """
+        Retrieve a menu that matches the provided title
+
+        :param match_title: the title to be match
+        :type match_title: str
+        :return: the retrieved PluginMenu object or None
+        :rttype: Optional[plugin_manager.model.PluginMenu
+
+        """
         idx = self.menus.index(match_title)
         if idx < 0:
             return None
@@ -243,5 +258,12 @@ class Plugin:
             return self.menus[idx]
 
     def remove_menu(self, match_title: str):
+        """
+        Remove a menu from the menu list
+
+        :param match_title: the title of the menu to be removed
+        :type match_title: str`
+        :return: None
+        """
         if self.menus.index(match_title):
             self.menus.remove(match_title)

@@ -13,7 +13,26 @@ import plugin_manager.model.plugin as model
 
 
 class EntryPointWidget(ttkb.Frame):
-    def __init__(self, parent, module: types.ModuleType, entry_point: Optional[Callable], column: int, row: int):
+    """
+    A ttkbootstrap.Combobox based widget that presents a list of module level functions that may be selected
+    entrypoints for PluginMenuItems
+
+    """
+    def __init__(self, parent, module: types.ModuleType, entry_point: Optional[types.FunctionType], column: int, row: int):
+        """
+        Creates an instance of plugin_manager.gui.tk_widgets.EntryPointWidget
+
+        :param parent: The GUI parent for this widget
+        :param module: The Python module from which the functions will be drawn
+        :type module: types.ModuleType
+        :param entry_point: The current value for the widget
+        :type entry_point: types.FunctionType
+        :param column: the column for the widget's label to be gridded
+        :type column: int
+        :param row: the row for the widget's label to be gridded
+        :type row: int
+
+        """
         ttkb.Frame.__init__(self, master=parent)
         self.module = module
         ttkb.Label(master=self, text='Entry Point', width=10).grid(column=column, row=row, padx=5, pady=5,
@@ -31,7 +50,15 @@ class EntryPointWidget(ttkb.Frame):
             if isinstance(entry_point, types.FunctionType):
                 self.entry_point_name_var.set(entry_point.__name__)
 
-    def set_entry_point_name(self, name: str):
+    def set_entry_point_name(self, name: str) -> None:
+        """
+        Set the value of the entry point name
+
+        :param name: the name's value
+        :type name: str
+        :return: None
+
+        """
         if len(name) > 0:
             if name in self.module.__dict__:
                 if isinstance(self.module.__dict__[name], types.FunctionType):
@@ -44,22 +71,64 @@ class EntryPointWidget(ttkb.Frame):
             self.entry_point_name_var.set(name)
 
     def get_entry_point_name(self) -> str:
-        print(f'get_entry_point_name {self.entry_point_name_var.get()}')
+        """
+        Retrieve the value of the entry point name
+
+        :return: the entry point name
+        :rtype: str
+
+        """
         return self.entry_point_name_var.get()
 
     def get_entry_point(self) -> Optional[types.FunctionType]:
+        """
+        Retrieve the entry point function object or None if no entry point has been selected
+
+        :return: the entry point function object
+        :rtype: Optional[types.FunctionType]
+
+        """
         if self.get_entry_point_name() in self.module:
             return self.module[self.get_entry_point_name()]
         return None
 
     def get_module(self) -> types.ModuleType:
+        """
+        Retrieve the module object
+
+        :return: the module object
+        :rtype: types.ModuleType
+
+        """
         return self.module
 
 
 class PluginMenuItemWidget(ttkb.Frame):
+    """
+    A ttkbootstrap based widget that presents and collects the information to create a plugin_manager.model.PluginMenuItem object
+
+    """
     def __init__(self, parent, module: types.ModuleType, cancel_action: Callable, save_action: Callable,
                  menu_item: Optional[model.PluginMenuItem] = None, menu_iid: Optional[str] = None,
                  item_iid: Optional[str] = None):
+        """
+        Creates an instance of plugin_manager.gui.tk_widgets.PluginMenuItemWidget
+
+        :param parent: the GUI parent for this widget
+        :param module: the module associated with the parent plugin_manager.model.PluginMenu
+        :type module: types.ModuleType
+        :param cancel_action: a callback routine to be invoked if the Cancel button is clicked
+        :type cancel_action: Callable
+        :param save_action: a callback routine to be invoked if the Save button is clicked
+        :type save_action: Callable
+        :param menu_item: an existing PluginMenuItem object
+        :type menu_item: plugin_manager.model.PlugingMenuItem
+        :param menu_iid: the iid of the parent PluginMenu in the PluginMenuTreeWidget
+        :type menu_iid: str
+        :param item_iid: the iid of the existing PluginMenuItem in the PluginMenuTreeWidget
+        :type item_iid: str
+
+        """
         ttkb.Frame.__init__(self, master=parent)
         self.menu_iid: Optional[str] = menu_iid
         self.item_iid: Optional[str] = item_iid
@@ -112,9 +181,15 @@ class PluginMenuItemWidget(ttkb.Frame):
                 self.sel_dp_type_var.set(1)
 
     def get_menu_item(self) -> model.PluginMenuItem:
+        """
+        Creates and returns a plugin_manager.model.PluginMenuItem object from the widget's  prompt values
+
+        :return:  a PluginMenuItem object built from the widget's prompt values
+        :rtype: plugin_manager.model.PluginItem
+
+        """
         title: str = self.title_widget.get_value()
         entry_point_name: str = self.entry_point_widget.get_entry_point_name()
-        print(f'get_menu_item: Entry Point Name {entry_point_name}')
         sel_person: bool = self.sel_person_var.get() == 1
         sel_date_range: bool = self.sel_dates_var.get() == 1
         sel_dp_type: bool = self.sel_dp_type_var.get() == 1
@@ -122,9 +197,7 @@ class PluginMenuItemWidget(ttkb.Frame):
             self.menu_item = model.PluginMenuItem(title=title, entry_point_name=entry_point_name,
                                                   select_person=sel_person, select_date_range=sel_date_range,
                                                   select_dp_type=sel_dp_type)
-            print('get_menu_item: New Item Created')
         else:
-            print('get_menu_item: Item Updated')
             self.menu_item.title = title
             self.menu_item.entry_point_name = entry_point_name
             self.menu_item.sel_person = sel_person
@@ -134,7 +207,23 @@ class PluginMenuItemWidget(ttkb.Frame):
 
 
 class ModuleWidget(widgets.LabeledTextWidget):
+    """
+    A widget that allows the user to select a Python module from a directory structure.
+
+    """
     def __init__(self, parent, module_name: str, column: int, row: int):
+        """
+        Creates an instance of ModuleWidget
+
+        :param parent: the GUI parent for this widget
+        :param module_name: the initial value for the widget module name prompt
+        :type module_name: str
+        :param column: the column the widgetss label will be gridded to.  The entry widget will be gridded to column + 1
+        :type column: int
+        :param row: the row the widget's label and entry widget will be gridded to
+        :type row: int
+
+        """
         widgets.LabeledTextWidget.__init__(self, parent=parent, label_text='Module', label_width=10,
                                            label_grid_args={'column': column, 'row': row, 'padx': 5, 'pady': 5,
                                            'sticky': tk.NW}, entry_width=100,
@@ -149,6 +238,13 @@ class ModuleWidget(widgets.LabeledTextWidget):
         parent.columnconfigure(2, weight=20)
 
     def browse(self):
+        """
+        Presents an open file dialog set up to select python .py files.  The name of the file becomes the new value
+        for the module name entry widget
+
+        :return: None
+
+        """
         parts: list[str] = self.get_value().split('.')
         module_path: pathlib.Path = pathlib.Path()
         for part in parts:
@@ -171,12 +267,33 @@ class ModuleWidget(widgets.LabeledTextWidget):
         self.set_module_name(mod_name)
 
     def get_module_name(self) -> str:
+        """
+        Retrieves the module name
+
+        :return: module name
+        :rtype: str
+        """
         return self.get_value()
 
     def set_module_name(self, module_name: str) -> None:
+        """
+        Sets the widget's module name prompt value
+
+        :param module_name: the value to be set
+        :type module_name: str
+        :return: None
+
+        """
         self.set_value(module_name)
 
     def get_module(self) -> types.ModuleType:
+        """
+        Retrieves the module object selected by the user
+
+        :return: a Python module object
+        :rtype: types.ModuleType
+
+        """
         try:
             module = importlib.import_module(self.get_module_name())
         except ModuleNotFoundError:
@@ -187,8 +304,24 @@ class ModuleWidget(widgets.LabeledTextWidget):
 
 
 class PluginMenuWidget(ttkb.Frame):
+    """
+    Prompts the user for the information necessary to construct a plugin_manager.model.PluginMenu object
+
+    """
     def __init__(self, parent, cancel_action: Callable, save_action: Callable,
                  menu: Optional[model.PluginMenu] = None, menu_iid: Optional[str] = None):
+        """
+        Creates an instance of PluginMenuWidget
+
+        :param parent: the GUI parent of this widget
+        :param cancel_action: a callback routine to be invoked when the Cancel button is clicked
+        :type cancel action: Callable
+        :param save_action: a callback routine to be invoked when the Save button is clicked
+        :type save_action: Callable
+        :param menu: a PluginMenu object or None
+        :param menu_iid: the iid of the PluginMenu object, taken from the PluginMenuTreeWidget
+
+        """
         ttkb.Frame.__init__(self, master=parent)
         self.menu_iid: Optional[str] = menu_iid
         self.menu: Optional[model.PluginMenu] = menu
@@ -210,6 +343,13 @@ class PluginMenuWidget(ttkb.Frame):
         ttkb.Button(self, text='Save', command=save_action).grid(column=2, row=row, padx=5, pady=5, sticky=tk.NW)
 
     def get_menu(self) -> model.PluginMenu:
+        """
+        Creates and returns a PluginMenu object from the widget's prompt values
+
+        :return: a PluginMenu object
+        :rtype: plugin_manager.model.PluginMenu
+
+        """
         title = self.title_widget.get_value()
         module = self.module_widget.get_module_name()
         if self.menu is None:
@@ -222,6 +362,17 @@ class PluginMenuWidget(ttkb.Frame):
 
 
 class PluginMenuTree(ttkb.Treeview):
+    """
+    A widget based on the ttkbootstrap.Treeview widget.  The tree items are PluginMenu object and their PluginMenuItem
+    children.  The tree structure is the repository for the PluginMenu and PluginMenuItems maintained by the Plugin
+    Management app.  This is an easy way to keep track of insertions and deletions.  The Plugin object written to JSON
+    is created from the nodes in this tree.  Each PluginMenu node contains two fields; one containing the output of
+    the Plugin Menu object's __str__ method, and the other containing the object itself.  The PluginMenu objects are
+    stored with an empty PluginMenuItem list.  A PluginMenu object children will be stored in PluginMenuItem nodes
+    that descend for it's node. Each PluginMenuItem node also contains two fields;  one for the output of it's
+    __str__ method and the other for the object itself.
+
+    """
     MENU_STR = 'menu_str'
     ITEM_STR = 'item_str'
     REPR = 'repr'
@@ -230,13 +381,31 @@ class PluginMenuTree(ttkb.Treeview):
 
     def __init__(self, parent, select_menu_action: Callable, select_item_action: Callable,
                  menus: list[model.PluginMenu] = []):
+        """
+        Creates an instance of PluginMenuTreeWidget
+
+        :param parent: the GUI parent for this widget
+        :param select_menu_action: a callback method to be invoked when a PluginMenu node is selected by the user
+        :type select_menu_action: Callable
+        :param select_item_action: a callback method to be invoked when a PluginMenuItem node is selected by the user.
+        :type select_item_action: Callable
+        :param menus: a list of PluginMenu objects to be used in building the Treeview widget
+        :type menus: list[PluginMenu]
+
+        """
         ttkb.Treeview.__init__(self, master=parent, columns=(PluginMenuTree.MENU_STR, PluginMenuTree.ITEM_STR,
-                                                             PluginMenuTree.REPR))
-        self.configure(displaycolumns=[PluginMenuTree.MENU_STR, PluginMenuTree.ITEM_STR])
-        self.columnconfigure(0, minsize=50)
-        self.columnconfigure(1, minsize=50)
-        self.heading(PluginMenuTree.MENU_STR, text='Menu')
-        self.heading(PluginMenuTree.ITEM_STR, text='Menu Item')
+                                                             PluginMenuTree.REPR), show='headings')
+        hscroll = ttkb.Scrollbar(master=self, orient=tk.HORIZONTAL, command=self.xview)
+        vscroll = ttkb.Scrollbar(master=self, orient=tk.VERTICAL, command=self.yview)
+        self.configure(displaycolumns=[PluginMenuTree.MENU_STR, PluginMenuTree.ITEM_STR], height=50,
+                       yscrollcommand=vscroll.set, xscrollcommand=hscroll.set)
+        vscroll.grid(column=1, row=0, sticky=tk.NS)
+        hscroll.grid(column=0, row=1, sticky=tk.EW)
+        self.columnconfigure(0, weight=1)
+        self.rowconfigure(0, weight=1)
+        self.column('#1', minwidth=40, stretch=False)
+        self.heading(PluginMenuTree.MENU_STR, text='Menu', anchor=tk.W)
+        self.heading(PluginMenuTree.ITEM_STR, text='Menu Item', anchor=tk.W)
         self.select_menu_action = select_menu_action
         self.select_item_action = select_item_action
         if len(menus) > 0:
@@ -254,6 +423,15 @@ class PluginMenuTree(ttkb.Treeview):
         self.tag_bind(PluginMenuTree.ITEM_TAG, '<<TreeviewSelect>>', self.select_item_action)
 
     def prev_index(self, iid: str) -> int:
+        """
+        Returns the index of the previous node at the hierachical level of the node indicated by the provided iid
+
+        :param iid: the iid of the node relative to which the previous node will be selected
+        :type iid: str`
+        :return: the index of the previous node, or -1 if the speicified node is the first node in the tree root's node list
+        :rtype: int
+
+        """
         return self.index(self.prev(iid))
 
     def next_index(self, iid: str) -> Union[int, str]:
@@ -264,11 +442,33 @@ class PluginMenuTree(ttkb.Treeview):
             return idx
 
     def save_menu_attr(self, menu_iid: str, menu: model.PluginMenu) -> None:
+        """
+        Update the node specified my menu_iid with the supplied PluginMenu object
+
+        :param menu_iid: the iid of the tree node to be updated
+        :type menu_iid: str
+        :param menu: the PluginMenu object to be stored in the tree node
+        :type menu: plugin_manager.model.PluginMenu
+        :return: None
+
+        """
         self.set(menu_iid, PluginMenuTree.MENU_STR, menu.__str__())
         self.set(menu_iid, PluginMenuTree.ITEM_STR, '')
         self.set(menu_iid, PluginMenuTree.REPR, menu.__repr__())
 
     def insert_menu(self, idx: Union[int, str]) -> tuple[str, model.PluginMenu]:
+        """
+        Insert a PluginMenu node and a child PluginMenuItem node before the node indicated by the idx argument and
+        return an empty PluginMenu object associated with the inserted node.  The PluginMenuItem node is created
+        to provided the menu's initial item, since another PluginMenuItem node can only be inserted by selecting an
+        existing PluginMenu node
+
+        :param idx: the index of the node the new node will be inserted before
+        :type idx: int
+        :return: an empty PluginMenu object
+        :rtype: plugin_manager.model.PluginMenu
+
+        """
         menu_iid: str = self.insert(parent='', index=idx, text='Menu:', open=True, tags=[PluginMenuTree.MENU_TAG])
         new_menu: model.PluginMenu = model.PluginMenu(title='New Menu', module_name='', items=[])
         self.save_menu_attr(menu_iid, new_menu)
@@ -278,11 +478,31 @@ class PluginMenuTree(ttkb.Treeview):
         return menu_iid, new_menu
 
     def save_item_attr(self, item_iid: str, item: model.PluginMenuItem) -> None:
+        """
+        Update the node specified my menu_iid with the supplied PluginMenu object
+
+        :param menu_iid: the iid of the tree node to be updated
+        :type menu_iid: str
+        :param item: the PluginMenuItem object to be stored in the tree node
+        :type item: plugin_manager.model.PluginMenuItem
+        :return: None
+
+        """
         self.set(item_iid, PluginMenuTree.MENU_STR, '')
         self.set(item_iid, PluginMenuTree.ITEM_STR, item.__str__())
         self.set(item_iid, PluginMenuTree.REPR, item.__repr__())
 
     def insert_menu_item(self, menu_iid: str, idx: Union[int, str]) -> tuple[str, model.PluginMenuItem]:
+        """
+        Insert a PluginMenuItem node before the node indicated by the idx argument and return an empty PluginMenuItem
+        object associated with the inserted node.
+
+        :param idx: the index of the node the new node will be inserted before
+        :type idx: int
+        :return: an empty PluginMenuItem object
+        :rtype: plugin_manager.model.PluginMenuItem
+
+        """
         new_item: model.PluginMenuItem = model.PluginMenuItem(title='New Item', entry_point_name='',
                                                               select_person=False, select_date_range=False,
                                                               select_dp_type=False)
@@ -292,6 +512,16 @@ class PluginMenuTree(ttkb.Treeview):
         return item_iid, new_item
 
     def rebuild_plugin(self, plugin: model.Plugin) -> model.Plugin:
+        """
+        Update the provided Plugin object with the PluginMenu/PluginMenuItem objects stored in the Treeview widget's
+        nodes.
+
+        :param plugin: the Plugin to be updated.
+        :type plugin: plugin_manager.model.Plugin
+        :return: the updated Plugin object
+        :rtype; plugin_manager.model.Plugin
+
+        """
         menu_list: list[model.PluginMenu] = []
         menu_iids: tuple[str] = self.get_children(item='')
         for menu_idx in range(0, len(menu_iids)):
@@ -312,16 +542,25 @@ class PluginMenuTree(ttkb.Treeview):
 
 
 class PluginWidget(ttkb.Frame):
-    def __init__(self, parent, plugin: Optional[model.Plugin], cancel_action: Callable, save_action: Optional[Callable],
-                 save_as_action: Callable):
+    """
+    Prompts the user for the title, description, author name and author email properties to be used in creating or
+    updating a plugin_manager.model.Plugin object
+
+    """
+    def __init__(self, parent, plugin: Optional[model.Plugin]):
+        """
+        Creates an instance of PluginWidget
+
+        :param parent: the GUI parent of this widget
+        :param plugin: a Plugin object or none
+        :type plugin: plugin_manager.model.Plugin
+
+        """
         ttkb.Frame.__init__(self, master=parent)
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
         self.rowconfigure(2, weight=1)
         self.plugin: Optional[model.Plugin] = plugin
-        self.cancel_action: Callable = cancel_action
-        self.save_action: Callable = save_action
-        self.save_as_action: Callable = save_as_action
         self.create: bool = False
         self.current_menu: Optional[model.PluginMenu] = None
         self.current_menu_iid: Optional[str] = None
@@ -363,21 +602,17 @@ class PluginWidget(ttkb.Frame):
                                                              entry_grid_args={'column': 1, 'row': row, 'padx': 5,
                                                                               'pady': 5, 'columnspan': 3})
         row += 1
-        if self.save_action is not None:
-            self.save_btn = ttkb.Button(master=header_frame, text='Save Plugin', command=self.save_action)
-            self.save_btn.grid(column=0, row=row, padx=5, pady=5, sticky=tk.EW)
-
-        self.save_as_btn = ttkb.Button(master=header_frame, text='Save Plugin As ...', command=self.save_as_action)
-        self.save_as_btn.grid(column=1, row=row, padx=5, pady=5, sticky=tk.W)
-
-        row += 1
+        ttkb.Label(header_frame, text=' ').grid(column=0, row=row, padx=5, pady=5, columnspan=3, sticky=tk.W)
         ttkb.Label(header_frame,
                    text='Click on a menu or item to select it for edit or deletion, or to insert above or below it.'
                         'To insert a menu, first select a menu, then click Insert Above or Insert Below, and a menu '
                         'and a single menu item under it will be created.  To insert a menu item, select a menu item '
-                        'under the menu you wish to add an item to, then click Insert Above or Insert Below.',
+                        'under the menu you wish to add an item to, then click Insert Above or Insert Below. If the'
+                        'menu item information exceeds it''s column width, you can move the menu item column by '
+                        'placing the cursor over the left edge of the Menu Item heading until a drag cursor is '
+                        'displayed.  Hold the left mouse button down while dragging the column to the left or right.',
                    wraplength=800, justify=tk.LEFT, anchor=tk.W) \
-            .grid(column=0, row=row, padx=5, columnspan=3, rowspan=3, sticky=tk.W)
+            .grid(column=0, row=row, padx=5, columnspan=3, rowspan=5, sticky=tk.W)
 
         header_frame.grid(column=0, row=1, padx=5, pady=5, sticky=tk.EW)
 
@@ -415,17 +650,41 @@ class PluginWidget(ttkb.Frame):
             self.populate_plugin_widget()
 
     def focus_set(self):
+        """
+        Delegate focus set calls to the Plugin Name widgetd
+
+        :return: None
+
+        """
         self.name_widget.focus_set()
 
     def disable_insert(self):
+        """
+        Disable the Insert Above and Insert Below buttons
+
+        :return: None
+
+        """
         self.insert_above_btn.configure(state=tk.DISABLED)
         self.insert_below_btn.configure(state=tk.DISABLED)
 
     def enable_insert(self):
+        """
+        Enable the Insert Above and Insert Below buttons
+
+        :return: None
+
+        """
         self.insert_above_btn.configure(state=tk.NORMAL)
         self.insert_below_btn.configure(state=tk.NORMAL)
 
     def replace_footer(self):
+        """
+        Create a blank place holder Frame and grid it into footer frame
+
+        :return: None
+
+        """
         if self.footer_frame is not None:
             self.footer_frame.forget()
         self.footer_frame = ttkb.Frame(self)
@@ -436,22 +695,49 @@ class PluginWidget(ttkb.Frame):
         self.footer_frame.grid(column=0, row=3, padx=15, pady=5, sticky=tk.NSEW)
 
     def cancel(self):
+        """
+        A callback method to be invoked when the Cancel button on the PluginMenuWidget or PluginMenuItemWidget is
+        clicked
+
+        :return: None
+
+        """
         self.replace_footer()
         self.enable_insert()
 
     def populate_plugin_widget(self):
+        """
+        Set the plugin name, description and author name and email using the provied Plugin object
+
+        :return: None
+
+        """
         self.name_widget.set_value(self.plugin.name)
         self.desc_widget.set_value(self.plugin.description)
         self.author_name_widget.set_value(self.plugin.author_name)
         self.author_email_widget.set_value(self.plugin.author_email)
 
     def save_menu(self):
+        """
+        A callback method to be invoked to save an updated PluginMenu object to its node in its PlugInMenuTree node.
+        After saving the object, the Insert Above/Below buttons are enabled and a placeholder frame is inserted into
+        the footer frame
+
+        :return: None
+
+        """
         self.current_menu = self.footer_widget.get_menu()
         self.menu_tree.save_menu_attr(self.current_menu_iid, self.current_menu)
         self.enable_insert()
         self.replace_footer()
 
     def select_menu(self, event):
+        """
+        A callback to be invoked when a Plugin node on the PluginMenuTreeWidget is clicked
+
+        :param event:
+        :return: None
+        """
         tree_element = self.menu_tree.selection()
         repr_str: str = self.menu_tree.set(tree_element[0], PluginMenuTree.REPR)
         menu: model.PluginMenu = eval(repr_str)
@@ -466,6 +752,9 @@ class PluginWidget(ttkb.Frame):
         self.enable_insert()
 
     def populate_menu_widget(self, menu_iid: str, menu: model.PluginMenu):
+        """
+        Creates a PluginMenuWidget from the provided PluginMenu object, places the widget in the footer frame
+        """
         self.footer_frame.forget()
         self.footer_widget = PluginMenuWidget(self.footer_frame, cancel_action=self.cancel,
                                               save_action=self.save_menu, menu=menu,
@@ -474,15 +763,25 @@ class PluginWidget(ttkb.Frame):
         self.footer_frame.grid(column=0, row=3, padx=15, pady=5, sticky=tk.NSEW)
 
     def save_menu_item(self):
-        print('Entering save_menu_item')
+        """
+        A callback method to be invoked when the Save button on the PluginMenuWidget is clicked
+
+        :return: None
+
+        """
         self.current_item: model.PluginMenuItem = self.footer_widget.get_menu_item()
-        print(f'Retrieved item from widget {self.current_item.__str__()}')
         self.menu_tree.save_item_attr(self.current_item_iid, self.current_item)
-        print('saved item to tree')
         self.enable_insert()
         self.replace_footer()
 
     def select_menu_item(self, event):
+        """
+        A callback method to be invoked when a PluginMenu node on the PluginMenuTreeWidget is clicked
+
+        :param event:
+        :return: None
+
+        """
         tree_element = self.menu_tree.selection()
         repr_str: str = self.menu_tree.set(tree_element[0], PluginMenuTree.REPR)
         item: model.PluginMenuItem = eval(repr_str)
@@ -504,6 +803,18 @@ class PluginWidget(ttkb.Frame):
 
     def populate_menu_item_widget(self, module_name: str, menu_iid: str, item_iid: str,
                                   item: model.PluginMenuItem) -> None:
+        """
+        Creates a PluginMenuItemWidget and populates its prompt values fro the provided PluginMenuItem.  Before
+        creating the widget, the module specified by the module_name property is imported.  If the module is not
+        found a ModuleNotFound exception is thrown.  If the module cannot be imported because off syntax errors,
+        an ImportError exception is thrown.
+
+        :param module_name:
+        :param menu_iid:
+        :param item_iid:
+        :param item:
+        :return:
+        """
         if len(module_name) > 0:
             try:
                 module: Optional[types.ModuleType] = importlib.import_module(module_name)
@@ -522,7 +833,14 @@ class PluginWidget(ttkb.Frame):
         self.footer_frame.grid(column=0, row=3, padx=15, pady=5, sticky=tk.NSEW)
 
     def insert_above(self) -> None:
-        print('insert_above')
+        """
+        A callback method to be invoked when the Insert Above button on the PluginMenuTreeWidget is clicked.  The
+        invocation is delegated to the insert_item_above method if a PluginMenuItem node was selected when the
+        button was clicked, or the insert_menu_above if a PluginMenu node was selected when the button was clicked
+
+        :return: None
+
+        """
         if self.current_menu is not None:
             if self.current_item is not None:
                 self.current_item_iid, self.current_item = self.insert_item_above()
@@ -537,7 +855,14 @@ class PluginWidget(ttkb.Frame):
         self.disable_insert()
 
     def insert_below(self) -> None:
-        print('insert_below')
+        """
+        A callback method to be invoked when the Insert Above button on the PluginMenuTreeWidget is clicked.  The
+        invocation is delegated to the insert_item_below method if a PluginMenuItem node was selected when the
+        button was clicked, or the insert_menu_below if a PluginMenu node was selected when the button was clicked
+
+        :return: None
+
+        """
         if self.current_menu is not None:
             if self.current_item is not None:
                 self.current_item_iid, self.current_item = self.insert_item_below()
@@ -552,6 +877,14 @@ class PluginWidget(ttkb.Frame):
         self.disable_insert()
 
     def delete(self) -> None:
+        """
+        A callback method to be invoked when the Delete button is clicked on the PluginMenuTreeWidget is clicked.
+        The invokation is delegated to the delete_item or delete_menu method, depending on whether a PluginMenuItem
+        or PluginMenu was selected when the button was clicked
+
+        :return: None
+
+        """
         if self.current_menu is not None:
             if self.current_item is not None:
                 self.delete_item()
@@ -561,36 +894,79 @@ class PluginWidget(ttkb.Frame):
         self.replace_footer()
 
     def insert_menu_above(self) -> tuple[str, model.PluginMenu]:
+        """
+        Insert a PluginMenu node above the selected node in the PluginMenuTreeWidget
+
+        :returns: the iid and PluginMenu object associated with the inserted node.
+        :rtype: tuple[str, plugin_manager.model.PluginMenu]
+
+        """
         idx = self.menu_tree.index(self.current_menu_iid)
-        print(f'insert_menu_above iid {self.current_menu_iid} idx {idx}')
         return self.menu_tree.insert_menu(idx)
 
     def insert_menu_below(self) -> tuple[str, model.PluginMenu]:
+        """
+        Insert a PluginMenu node below the selected node in the PluginMenuTreeWidget
+
+        :returns: the iid and PluginMenu object associated with the inserted node.
+        :rtype: tuple[str, plugin_manager.model.PluginMenu]
+
+        """
         idx = self.menu_tree.next_index(self.current_menu_iid)
-        print(f'insert_menu_below iid {self.current_menu_iid} idx {idx}')
         return self.menu_tree.insert_menu(idx)
 
     def delete_menu(self):
+        """
+        Delete the currently selected PluginMenu node on the PluginMenuTreeWidget
+
+        :return: None
+
+        """
         self.menu_tree.delete(self.footer_widget.menu_iid)
         self.current_menu = None
         self.current_menu_iid = None
 
     def insert_item_above(self) -> tuple[str, model.PluginMenuItem]:
+        """
+         Insert a PluginMenuItem node above the selected node in the PluginMenuTreeWidget
+
+         :returns: the iid and PluginMenuItem object associated with the inserted node.
+         :rtype: tuple[str, plugin_manager.model.PluginMenuItem]
+
+         """
         idx = self.menu_tree.index(self.current_item_iid)
-        print(f'insert_item_above iid {self.current_item_iid} idx {idx}')
         return self.menu_tree.insert_menu_item(self.current_menu_iid, idx)
 
     def insert_item_below(self) -> tuple[str, model.PluginMenuItem]:
+        """
+         Insert a PluginMenuItem node below the selected node in the PluginMenuTreeWidget
+
+         :returns: the iid and PluginMenuItem object associated with the inserted node.
+         :rtype: tuple[str, plugin_manager.model.PluginMenuItem]
+
+         """
         idx = self.menu_tree.next_index(self.current_item_iid)
-        print(f'insert_item_above iid {self.current_item_iid} idx {idx}')
         return self.menu_tree.insert_menu_item(self.current_menu_iid, idx)
 
     def delete_item(self):
+        """
+        Delete the currently selected PluginMenuItem node on the PluginMenuTreeWidget
+
+        :return: None
+
+        """
         self.menu_tree.delete(self.footer_widget.item_iid)
         self.current_item = None
         self.current_item_iid = None
 
     def rebuild_plugin(self) -> model.Plugin:
+        """
+        Create a Plugin object from the prompts on the PluginWidget and the nodes on the PluginMenuTreeWidget
+
+        :return: the created Plugin object
+        :rtype: plugin_manager.model.Plugin
+
+        """
         if self.plugin is None:
             self.plugin = model.Plugin(name=self.name_widget.get_value(),
                                        description=self.desc_widget.get_value(),
