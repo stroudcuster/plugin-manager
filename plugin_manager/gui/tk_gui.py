@@ -42,9 +42,8 @@ class Application(ttkb.Window):
         self.file_menu.add_command(label=Application.MLABEL_QUIT, command=self.exit_app)
         menubar.add_cascade(label='File', menu=self.file_menu)
         self.file_menu.entryconfigure(Application.MLABEL_SAVE, state=ttkb.DISABLED)
-        self.file_menu.entryconfigure(Application.MLABEL_SAVE_AS, state=ttkb.DISABLED)
 
-        self.json_path: Optional[pathlib.Path] = None
+        self.json_path: Optional[pathlib.Path] = pathlib.Path.cwd()
         self.plugin: Optional[model.Plugin] = None
 
         row: int = 0
