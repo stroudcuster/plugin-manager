@@ -14,7 +14,7 @@ autodoc_mock_imports = ["ttkbootstrap", "widgets"]
 project = 'plugin_manager'
 copyright = '2022, Stroud Custer'
 author = 'Stroud Custer'
-release = '0.1.0'
+release = '0.1.2'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

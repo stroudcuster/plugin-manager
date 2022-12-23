@@ -1,6 +1,6 @@
 [project]
 name = "json_plugin_mgr"
-version = "0.1.1"
+version = "0.1.2"
 description = "A collection of ttkbootrap based GUI widgets"
 requires-python = ">=3.8"
 license = {file = "LICENSE"}
