@@ -14,7 +14,7 @@ autodoc_mock_imports = ["ttkbootstrap", "widgets"]
 project = 'plugin_manager'
 copyright = '2022, Stroud Custer'
 author = 'Stroud Custer'
-release = '0.1.2'
+release = '0.1.3'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -33,5 +33,5 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
+html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']

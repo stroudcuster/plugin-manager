@@ -1,7 +1,7 @@
 [project]
 name = "json_plugin_mgr"
-version = "0.1.2"
-description = "A collection of ttkbootrap based GUI widgets"
+version = "0.1.3"
+description = "Create and maintain JSON menu specification files that can be used add functionality to an existing open source Python application through a plug in."
 requires-python = ">=3.8"
 license = {file = "LICENSE"}
 classifiers = [
